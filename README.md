@@ -1,10 +1,11 @@
-# Compiler Construction S22 course
+# Advanced Compilers Construction and Program Analysis S22 course
 Compiler implementation for the Functional Language.
 > Semester 6, 3rd study-year, Innopolis University.
 
-This is a project assignment about creating a compiler for the toy functional language (similar to Lisp).
+- This is a project assignment about creating a compiler for the toy functional language (similar to Lisp) with a static type system.
+- Language name: **Plus++**
 
-*Haskell team* B19-SD-01 members
+*C++ team* B19-SD-01 members
 - Roman Soldatov 
 - Daniil Livitin	
 - Timur Nugaev	
