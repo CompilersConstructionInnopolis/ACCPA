@@ -1,0 +1,2 @@
+(setq a 22)
+(isatom (a))

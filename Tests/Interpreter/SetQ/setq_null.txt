@@ -1,0 +1,2 @@
+(setq z null)
+z
