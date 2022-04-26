@@ -1,3 +1,4 @@
+(functype Cube (int int))
 (setq arg 555)
 arg
 'arg

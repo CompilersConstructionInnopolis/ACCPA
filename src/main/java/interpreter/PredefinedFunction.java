@@ -11,7 +11,7 @@ public class PredefinedFunction {
 
     static final List<String> predefinedFunctionNames = Arrays.asList("plus", "minus", "times", "divide", "head", "tail",
             "cons", "equal", "nonequal", "less", "lesseq", "greater", "greatereq", "isint", "isreal", "isbool",
-            "isnull", "isatom", "islist", "and", "or", "xor", "not", "eval", "isempty", "length");
+            "isnull", "isatom", "islist", "and", "or", "xor", "not", "eval", "isempty", "length", "functype");
     List<ElementInterface> elements;
 
     public PredefinedFunction(List<ElementInterface> elements) {

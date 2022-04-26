@@ -1,2 +1,3 @@
+(functype myFunc (int int))
 (setq myFunc (lambda (p) (plus p 1)))
 (myFunc 3)

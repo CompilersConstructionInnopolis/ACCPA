@@ -83,16 +83,18 @@
 %token <XorToken> XorToken
 %token <NotToken> NotToken
 %token <EvalToken> EvalToken
+%token <FuncTypeToken> FuncTypeToken
 
 %type Program
 %type SpecialForm
-%type <NodeInterface> Element
+%type <FuncTypeNode> FuncType
+%type <ElementInterface> Element
 %type <ListNode> Elements
 %type <AtomNode> Atom
 %type <LiteralNode> Literal
-%type <NodeInterface> List
-%type <NodeInterface> SpecialForm
-%type <NodeInterface> OptionalElement
+%type <ElementInterface> List
+%type <ElementInterface> SpecialForm
+%type <ElementInterface> OptionalElement
 
 %start Program
 
@@ -111,6 +113,7 @@ Element
 	| Literal {$$ = $1;}
 	| List {$$ = $1;}
 	| QuoteShortToken Element {$$ = new QuoteNode($2);}
+	| FuncType {$$ = $1;}
 	;
 List
 	: OpenParenthesisToken Element Elements CloseParenthesisToken {$$ = new ListNode($2, $3);}
@@ -165,4 +168,7 @@ Literal
 	| BooleanLiteralToken {$$ = new LiteralNode($1);}
 	| NullLiteralToken {$$ = new LiteralNode($1);}
 	;
+
+FuncType
+	: FuncTypeToken Atom List {$$ = new FuncTypeNode($2, $3); }
 %%

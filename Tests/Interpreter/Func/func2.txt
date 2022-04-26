@@ -1,3 +1,4 @@
+(functype Cube (int int))
 (func Cube (arg) (times (times arg arg) arg))
 (setq x (Cube 2))
 x

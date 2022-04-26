@@ -1,3 +1,4 @@
+(functype makeList (int (int)))
 (func makeList (A) (A))
 (setq a (makeList 1))
 a

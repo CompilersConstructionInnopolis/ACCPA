@@ -1,9 +1,11 @@
+import interpreter.TypesTable;
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         final String DEFAULT_PATH = "Tests/program.txt";
-        final boolean LOG_DEFAULT = true;
+        final boolean LOG_DEFAULT = false;
         final String LOG_PARAMETER_NAME = "log";
         final String programSourcePath = args.length >= 1 ? args[0] : DEFAULT_PATH;
         boolean logging = args.length >= 2 ? LOG_PARAMETER_NAME.equals(args[1]) : LOG_DEFAULT;
@@ -18,6 +20,7 @@ public class Main {
             try {
                 Compiler compiler = new Compiler(programSourcePath);
                 System.out.println(compiler.interpret());
+                System.out.println(TypesTable.getInstance().getTypesTable());
             } catch (IOException e) {
                 e.printStackTrace();
             }

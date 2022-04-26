@@ -59,7 +59,12 @@ public class ListNode implements ElementInterface {
                 evaluatedElements.add(returnResult);
                 break;
             }
-            evaluatedElements.add(evaluatedElement);
+            if (evaluatedElement != null && evaluatedElement.toString().equals("'()")){
+
+            } else {
+                evaluatedElements.add(evaluatedElement);
+            }
+
         }
         return new ListNode(evaluatedElements);
     }

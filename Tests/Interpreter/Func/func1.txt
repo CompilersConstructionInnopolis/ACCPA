@@ -1,2 +1,3 @@
+(functype Cube (int int))
 (func Cube (arg) (times (times arg arg) arg))
 (Cube 2)

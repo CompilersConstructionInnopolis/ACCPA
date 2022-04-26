@@ -1,3 +1,5 @@
+(functype addtwo (int int))
+(functype timesthree (int int))
 (func addtwo (x) (plus x 2))
 (func timesthree (x) (times x 3))
 (setq x 2)

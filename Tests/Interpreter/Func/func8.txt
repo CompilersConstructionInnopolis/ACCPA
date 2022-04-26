@@ -1,3 +1,4 @@
+(functype Trivial (unit int))
 (func Trivial () 1)
 (setq x Trivial)
 (setq a (x))

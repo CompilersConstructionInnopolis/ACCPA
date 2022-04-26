@@ -1,6 +1,6 @@
 package lexical_analysis;
 
-import lexical_analysis.tokens.Token;
+import lexical_analysis.tokens.FuncTypeToken;import lexical_analysis.tokens.Token;
 import lexical_analysis.tokens.arithmetic_function.DivideToken;
 import lexical_analysis.tokens.arithmetic_function.MinusToken;
 import lexical_analysis.tokens.arithmetic_function.PlusToken;
@@ -89,6 +89,8 @@ Not = (not)
 
 Eval = (eval)
 
+FuncType = (functype)
+
 IntegerNumberLiteral = -{0,1}[0-9]+
 RealNumberLiteral = -{0,1}[0-9]+[.][0-9]+
 BooleanLiteral = (false|true)
@@ -134,7 +136,7 @@ IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
 
 %%
 
-
+{FuncType} {addToken(FuncTypeToken.class, yyline, yycolumn, yytext());}
 {OpenBrace}  {addToken(OpenParenthesisToken.class, yyline, yycolumn, yytext());}
 {CloseBrace} {addToken(CloseParenthesisToken.class, yyline, yycolumn, yytext());}
 {Setq} {addToken(SetQToken.class, yyline, yycolumn, yytext());}
