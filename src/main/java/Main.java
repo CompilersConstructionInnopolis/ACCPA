@@ -1,5 +1,8 @@
+import utils.StandardLibraryUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static utils.StandardLibraryUtils.*;
 
@@ -7,11 +10,11 @@ public class Main {
     public static void main(String[] args) {
 
         // user will write program into main.txt
-        final String DEFAULT_PROGRAM_PATH = "main.txt";
+        final String DEFAULT_PROGRAM_PATH = "code/main.txt";
 
         // compiler will be running run.txt
         // run.txt will contain original program from main.txt + all the code from imported libraries
-        final String RUNNABLE_PROGRAM_PATH = "run.txt";
+        final String RUNNABLE_PROGRAM_PATH = "code/run.txt";
 
         File runnableFile = new File(RUNNABLE_PROGRAM_PATH);
         final boolean LOG_DEFAULT = false;
@@ -20,13 +23,16 @@ public class Main {
         boolean logging = args.length >= 2 ? LOG_PARAMETER_NAME.equals(args[1]) : LOG_DEFAULT;
         try {
             // method for adding code from imports to our run.txt file
-            addImportsToFile(programSourcePath, RUNNABLE_PROGRAM_PATH);
-
+            addImportsToFile(DEFAULT_PROGRAM_PATH, RUNNABLE_PROGRAM_PATH);
             run(RUNNABLE_PROGRAM_PATH, logging);
             runnableFile.delete();
+            StandardLibraryUtils.usedImports = new ArrayList<>();
+//            removeLibraries();
         } catch (Error | Exception error) {
-            runnableFile.delete();
             System.out.println(error.getMessage());
+            runnableFile.delete();
+            StandardLibraryUtils.usedImports = new ArrayList<>();
+//            removeLibraries();
         }
     }
 

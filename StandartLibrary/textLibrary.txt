@@ -1,1 +1,0 @@
-(func sum (a) (plus a a))

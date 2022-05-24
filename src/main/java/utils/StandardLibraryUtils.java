@@ -49,7 +49,7 @@ public class StandardLibraryUtils {
                     for (var nameOfImport : listOfImports) {
                         if (!usedImports.contains(nameOfImport)) {
                             usedImports.add(nameOfImport);
-                            final String pathOfStandartLibrary = "StandartLibrary/" + nameOfImport;
+                            final String pathOfStandartLibrary = "standard_library/" + nameOfImport;
                             addImportsToFile(pathOfStandartLibrary, runnablePath);
 
 //                            Path filePathOfAdditionalLibrary = Paths.get(pathOfStandartLibrary);
@@ -123,5 +123,12 @@ public class StandardLibraryUtils {
             }
         }
         return resultedString.strip();
+    }
+
+    public static void removeLibraries() {
+        File dir = new File("standard_library");
+        for(File file: dir.listFiles())
+            if (!file.isDirectory() && !file.getName().equals("std.txt"))
+                file.delete();
     }
 }
