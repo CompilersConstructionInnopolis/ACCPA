@@ -1,16 +1,36 @@
+import java.io.File;
 import java.io.IOException;
+
+import static utils.StandardLibraryUtils.*;
 
 public class Main {
     public static void main(String[] args) {
-        final String DEFAULT_PATH = "main.txt";
+
+        // user will write program into main.txt
+        final String DEFAULT_PROGRAM_PATH = "main.txt";
+
+        // compiler will be running run.txt
+        // run.txt will contain original program from main.txt + all the code from imported libraries
+        final String RUNNABLE_PROGRAM_PATH = "run.txt";
+
+        File runnableFile = new File(RUNNABLE_PROGRAM_PATH);
         final boolean LOG_DEFAULT = false;
         final String LOG_PARAMETER_NAME = "log";
-        final String programSourcePath = args.length >= 1 ? args[0] : DEFAULT_PATH;
+        final String programSourcePath = args.length >= 1 ? args[0] : DEFAULT_PROGRAM_PATH;
         boolean logging = args.length >= 2 ? LOG_PARAMETER_NAME.equals(args[1]) : LOG_DEFAULT;
-        run(programSourcePath, logging);
+        try {
+            // method for adding code from imports to our run.txt file
+            addImportsToFile(programSourcePath, RUNNABLE_PROGRAM_PATH);
+
+            run(RUNNABLE_PROGRAM_PATH, logging);
+            runnableFile.delete();
+        } catch (Error | Exception error) {
+            runnableFile.delete();
+            System.out.println(error.getMessage());
+        }
     }
 
-    public static void run(final String programSourcePath, final boolean logging) {
+    public static String run(final String programSourcePath, final boolean logging) {
         if (logging) {
             LogMode logMode = new LogMode(programSourcePath);
             logMode.logging();
@@ -18,9 +38,11 @@ public class Main {
             try {
                 Compiler compiler = new Compiler(programSourcePath);
                 System.out.println(compiler.interpret());
+                return compiler.interpret();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 }
