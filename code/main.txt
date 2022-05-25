@@ -1,6 +1,7 @@
 import std.txt
 
 (sort (1000 -1000 213 2 1))
+(reverse (1 2 3 4 5))
 (define x Int)
 (setq x 3)
 x

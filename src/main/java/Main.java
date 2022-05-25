@@ -17,7 +17,7 @@ public class Main {
         final String RUNNABLE_PROGRAM_PATH = "code/run.txt";
 
         File runnableFile = new File(RUNNABLE_PROGRAM_PATH);
-        final boolean LOG_DEFAULT = false;
+        final boolean LOG_DEFAULT = true;
         final String LOG_PARAMETER_NAME = "log";
         final String programSourcePath = args.length >= 1 ? args[0] : DEFAULT_PROGRAM_PATH;
         boolean logging = args.length >= 2 ? LOG_PARAMETER_NAME.equals(args[1]) : LOG_DEFAULT;
@@ -29,7 +29,8 @@ public class Main {
             StandardLibraryUtils.usedImports = new ArrayList<>();
 //            removeLibraries();
         } catch (Error | Exception error) {
-            error.printStackTrace();
+            System.out.println(error.getMessage());
+//            error.printStackTrace();
             runnableFile.delete();
             StandardLibraryUtils.usedImports = new ArrayList<>();
 //            removeLibraries();
