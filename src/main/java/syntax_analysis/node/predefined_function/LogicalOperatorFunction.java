@@ -2,6 +2,7 @@ package syntax_analysis.node.predefined_function;
 
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class LogicalOperatorFunction implements ElementInterface {
     ElementInterface firstElement;
@@ -45,6 +46,13 @@ public class LogicalOperatorFunction implements ElementInterface {
                 throw new RuntimeException("Undefined logical unary operator: " + operation);
         }
         return result;
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+
+        return null;
     }
 
     private LiteralNode performBinaryOperation(boolean fElValue, boolean sElValue) {

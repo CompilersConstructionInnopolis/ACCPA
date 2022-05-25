@@ -1,0 +1,3 @@
+import stdTest.txt
+
+(functionAsArgument easyFunc 5)

@@ -2,6 +2,7 @@ package syntax_analysis.node.special_form;
 
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public
 class CondNode implements ElementInterface {
@@ -35,6 +36,12 @@ class CondNode implements ElementInterface {
             return this.falseAction.evaluate();
         }
         throw new RuntimeException("First element in 'cond' should be boolean, but given " + condition);
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
     }
 
     @Override

@@ -1,9 +1,10 @@
 package syntax_analysis.node;
 
 import interpreter.DefinedFunction;
-import interpreter.NestedFormBreak;
 import interpreter.PredefinedFunction;
-import syntax_analysis.node.special_form.ReturnNode;
+import syntax_analysis.node.type_node.ListType;
+import syntax_analysis.node.type_node.NodeType;
+import syntax_analysis.node.type_node.UnitType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,17 +51,31 @@ public class ListNode implements ElementInterface {
         }
         List<ElementInterface> evaluatedElements = new ArrayList<>();
         for (ElementInterface element : elements) {
-            if (NestedFormBreak.getInstance().scopeValue() < 0) {
-                break;
-            }
             ElementInterface evaluatedElement = element.evaluate();
-            if (evaluatedElement instanceof ReturnNode) {
-                ElementInterface returnResult = ((ReturnNode) evaluatedElement).element.evaluate();
-                evaluatedElements.add(returnResult);
-                break;
-            }
             evaluatedElements.add(evaluatedElement);
         }
         return new ListNode(evaluatedElements);
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        PredefinedFunction predefinedFunction = new PredefinedFunction(elements);
+        if (predefinedFunction.isPredefinedFunction()) {
+            // todo return function type
+            throw new RuntimeException("Not implemented in ListNode :(");
+        }
+        DefinedFunction definedFunction = new DefinedFunction(elements);
+        if (definedFunction.isDefinedFunction()) {
+            // todo return function type
+            throw new RuntimeException("Not implemented in ListNode :(");
+        }
+        if (elements.isEmpty()) {
+            return new ListType(new UnitType());
+        }
+        NodeType listType = elements.get(0).getReturnType();
+        if (!elements.stream().map(ElementInterface::getReturnType).allMatch(type -> type.isEqualType(listType))) {
+            throw new RuntimeException("List must be homogeneous");
+        }
+        return new ListType(listType);
     }
 }

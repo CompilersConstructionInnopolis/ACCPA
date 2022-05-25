@@ -5,6 +5,7 @@ import interpreter.PredefinedFunction;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.FunctionAtom;
 import syntax_analysis.node.ListNode;
+import syntax_analysis.node.type_node.NodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,13 @@ public class EvaluatorFunction implements ElementInterface {
         } catch (ClassCastException e) {
             return evaluatedArgument;
         }
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+
+        return null;
     }
 
     @Override

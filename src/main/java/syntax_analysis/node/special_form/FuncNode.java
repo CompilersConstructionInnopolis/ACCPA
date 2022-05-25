@@ -5,6 +5,7 @@ import interpreter.FunctionsTable;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.FunctionAtom;
+import syntax_analysis.node.type_node.NodeType;
 
 public class FuncNode implements ElementInterface {
     AtomNode functionName;
@@ -32,6 +33,12 @@ public class FuncNode implements ElementInterface {
         FunctionAtom function = new FunctionAtom(FunctionAtom.getListFunctionArguments(argumentsList), functionBody);
         functionName.value = function;
         FunctionsTable.getInstance().addFunction(functionName.name, function);
+        return null;
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
         return null;
     }
 

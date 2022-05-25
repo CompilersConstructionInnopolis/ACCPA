@@ -1,6 +1,7 @@
 package syntax_analysis.node;
 
 import interpreter.AtomsTable;
+import syntax_analysis.node.type_node.NodeType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +52,12 @@ public class FunctionAtom implements ElementInterface {
         ElementInterface result = body.evaluate();
         AtomsTable.getInstance().leaveLocalContext();
         return result;
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
     }
 
     public int getArgumentsNumber() {

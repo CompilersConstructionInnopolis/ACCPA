@@ -1,0 +1,5 @@
+import stdTest.txt (func minuss (a) (minus a a)) import textLibrary.txt
+
+(functionAsArgument easyFunc 5)
+(sum 5)
+(minuss 5)

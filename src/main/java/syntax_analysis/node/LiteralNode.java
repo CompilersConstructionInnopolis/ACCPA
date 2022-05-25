@@ -1,28 +1,32 @@
 package syntax_analysis.node;
 
-import lexical_analysis.tokens.literal.BooleanLiteralToken;
-import lexical_analysis.tokens.literal.IntegerNumberLiteralToken;
-import lexical_analysis.tokens.literal.LiteralToken;
-import lexical_analysis.tokens.literal.RealNumberLiteralToken;
+import lexical_analysis.tokens.literal.*;
+import syntax_analysis.node.type_node.*;
 
 public class LiteralNode implements ElementInterface {
     public Integer integerValue;
-    public Double realValue;
+    public Double doubleValue;
     public Boolean booleanValue;
+
+    public String stringValue;
+
+    public LiteralNode() {
+    }
 
     public LiteralNode(int value) {
         integerValue = value;
     }
 
-    public LiteralNode() {
-    }
-
     public LiteralNode(double value) {
-        realValue = value;
+        doubleValue = value;
     }
 
     public LiteralNode(boolean value) {
         booleanValue = value;
+    }
+
+    public LiteralNode(String value) {
+        stringValue = value;
     }
 
     public LiteralNode(LiteralToken token) {
@@ -30,9 +34,11 @@ public class LiteralNode implements ElementInterface {
         if (token instanceof IntegerNumberLiteralToken) {
             this.integerValue = Integer.valueOf(content);
         } else if (token instanceof RealNumberLiteralToken) {
-            this.realValue = Double.valueOf(content);
+            this.doubleValue = Double.valueOf(content);
         } else if (token instanceof BooleanLiteralToken) {
             this.booleanValue = Boolean.valueOf(content);
+        } else if (token instanceof StringLiteralToken) {
+            this.stringValue = content;
         }
     }
 
@@ -40,13 +46,16 @@ public class LiteralNode implements ElementInterface {
         if (integerValue != null) {
             return integerValue;
         }
-        if (realValue != null) {
-            return realValue;
+        if (doubleValue != null) {
+            return doubleValue;
         }
         if (booleanValue != null) {
             return booleanValue;
         }
-        return null;
+        if (stringValue != null) {
+            return stringValue;
+        }
+        throw new RuntimeException("Literal value is null");
     }
 
     @Override
@@ -54,17 +63,37 @@ public class LiteralNode implements ElementInterface {
         if (integerValue != null) {
             return integerValue.toString();
         }
-        if (realValue != null) {
-            return realValue.toString();
+        if (doubleValue != null) {
+            return doubleValue.toString();
         }
         if (booleanValue != null) {
             return booleanValue.toString();
         }
-        return "null";
+        if (stringValue != null) {
+            return stringValue;
+        }
+        throw new RuntimeException("Literal value is null");
     }
 
     @Override
     public ElementInterface evaluate() {
         return this;
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        if (integerValue != null) {
+            return new IntType();
+        }
+        if (doubleValue != null) {
+            return new DoubleType();
+        }
+        if (booleanValue != null) {
+            return new BooleanType();
+        }
+        if (stringValue != null) {
+            return new StringType();
+        }
+        throw new RuntimeException("Literal value is null");
     }
 }

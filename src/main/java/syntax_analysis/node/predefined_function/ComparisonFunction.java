@@ -3,6 +3,7 @@ package syntax_analysis.node.predefined_function;
 import exceptions.ComparisonException;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class ComparisonFunction implements ElementInterface {
     ElementInterface firstElement;
@@ -31,6 +32,13 @@ public class ComparisonFunction implements ElementInterface {
         Boolean rOBool = rightOperandLiteral instanceof Boolean ? (boolean) rightOperandLiteral : null;
 
         return new LiteralNode(Boolean.TRUE.equals(this.performOperation(lOInt, lOReal, rOInt, rOReal, lOBool, rOBool)));
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+
+        return null;
     }
 
 

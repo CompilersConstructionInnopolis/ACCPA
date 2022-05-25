@@ -2,6 +2,7 @@ package syntax_analysis.node.predefined_function;
 
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class ArithmeticFunction implements ElementInterface {
     ElementInterface leftOperand;
@@ -27,6 +28,12 @@ public class ArithmeticFunction implements ElementInterface {
         Double rOReal = rightOperandLiteral instanceof Double ? (double) rightOperandLiteral : null;
 
         return this.performOperation(lOInt, lOReal, rOInt, rOReal);
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
     }
 
     private LiteralNode performOperation(Integer lOInt, Double lOReal, Integer rOInt, Double rOReal) {
