@@ -14,28 +14,10 @@ import java.util.stream.Collectors;
 
 public class ListNode implements ElementInterface {
     public List<ElementInterface> elements;
-    public Token token;
 
     public ListNode() {
         elements = new ArrayList<>();
     }
-
-    public ListNode(Token token) {
-        this.token = token;
-    }
-
-    public ListNode(ElementInterface element, Token token) {
-        elements = new ArrayList<>();
-        elements.add(element);
-        this.token = token;
-    }
-
-    public ListNode(List<ElementInterface> elements, Token token) {
-        this.elements = new ArrayList<>();
-        this.elements.addAll(elements);
-        this.token = token;
-    }
-
     public ListNode(ElementInterface element) {
         elements = new ArrayList<>();
         elements.add(element);
@@ -44,13 +26,6 @@ public class ListNode implements ElementInterface {
     public ListNode(List<ElementInterface> elements) {
         this.elements = new ArrayList<>();
         this.elements.addAll(elements);
-    }
-
-    public ListNode(ElementInterface element, ListNode list, Token token) {
-        elements = new ArrayList<>();
-        elements.add(element);
-        elements.addAll(list.elements);
-        this.token = token;
     }
 
     public ListNode(ElementInterface element, ListNode list) {
