@@ -24,7 +24,7 @@ public class Main {
         try {
             // method for adding code from imports to our run.txt file
             addImportsToFile(DEFAULT_PROGRAM_PATH, RUNNABLE_PROGRAM_PATH);
-            run(RUNNABLE_PROGRAM_PATH, logging);
+            System.out.print(run(RUNNABLE_PROGRAM_PATH, logging));
             runnableFile.delete();
             StandardLibraryUtils.usedImports = new ArrayList<>();
 //            removeLibraries();
@@ -43,7 +43,7 @@ public class Main {
         } else {
             try {
                 Compiler compiler = new Compiler(programSourcePath);
-                System.out.println(compiler.interpret());
+//                System.out.println(compiler.interpret());
                 return compiler.interpret();
             } catch (IOException e) {
                 e.printStackTrace();
