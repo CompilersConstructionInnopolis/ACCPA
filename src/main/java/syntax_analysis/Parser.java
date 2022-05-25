@@ -43,7 +43,9 @@ import java.util.ArrayList;
 /* "%code imports" blocks.  */
 /* "Parser.y":7  */
 
+	import lexical_analysis.tokens.Token;
 	import lexical_analysis.tokens.EvalToken;
+	import lexical_analysis.tokens.arithmetic_function.DivideToken;
         import lexical_analysis.tokens.IdentifierToken;
         import lexical_analysis.tokens.arithmetic_function.DivideToken;
         import lexical_analysis.tokens.arithmetic_function.MinusToken;
@@ -69,7 +71,7 @@ import java.util.ArrayList;
         import java.io.FileReader;
         import java.io.IOException;
 
-/* "Parser.java":73  */
+/* "Parser.java":75  */
 
 /**
  * A Bison parser, automatically generated from <tt>Parser.y</tt>.
@@ -628,475 +630,475 @@ public class Parser
       {
           case 2: /* Program: Element  */
   if (yyn == 2)
-    /* "Parser.y":121  */
+    /* "Parser.y":123  */
                   {ast = new AST(new ListNode(((ElementInterface)(yystack.valueAt (0)))));};
   break;
 
 
   case 3: /* Program: Element Elements  */
   if (yyn == 3)
-    /* "Parser.y":122  */
+    /* "Parser.y":124  */
                            {ast = new AST(new ListNode(((ElementInterface)(yystack.valueAt (1))), ((ListNode)(yystack.valueAt (0))))); };
   break;
 
 
   case 4: /* Elements: %empty  */
   if (yyn == 4)
-    /* "Parser.y":125  */
+    /* "Parser.y":127  */
                        {yyval = new ListNode();};
   break;
 
 
   case 5: /* Elements: Element Elements  */
   if (yyn == 5)
-    /* "Parser.y":126  */
+    /* "Parser.y":128  */
                            {yyval = new ListNode(((ElementInterface)(yystack.valueAt (1))), ((ListNode)(yystack.valueAt (0))));};
   break;
 
 
   case 6: /* TupleElements: %empty  */
   if (yyn == 6)
-    /* "Parser.y":129  */
+    /* "Parser.y":131  */
                        {yyval = new ListNode();};
   break;
 
 
   case 7: /* TupleElements: CommaToken Element TupleElements  */
   if (yyn == 7)
-    /* "Parser.y":130  */
-                                           {yyval = new ListNode(((ElementInterface)(yystack.valueAt (1))), ((ListNode)(yystack.valueAt (0))));};
+    /* "Parser.y":132  */
+                                           {yyval = new ListNode(((ElementInterface)(yystack.valueAt (1))), ((ListNode)(yystack.valueAt (0))) );};
   break;
 
 
   case 8: /* Element: Atom  */
   if (yyn == 8)
-    /* "Parser.y":133  */
+    /* "Parser.y":135  */
                {yyval = ((AtomNode)(yystack.valueAt (0)));};
   break;
 
 
   case 9: /* Element: Literal  */
   if (yyn == 9)
-    /* "Parser.y":134  */
+    /* "Parser.y":136  */
                   {yyval = ((LiteralNode)(yystack.valueAt (0)));};
   break;
 
 
   case 10: /* Element: List  */
   if (yyn == 10)
-    /* "Parser.y":135  */
+    /* "Parser.y":137  */
                {yyval = ((ElementInterface)(yystack.valueAt (0)));};
   break;
 
 
   case 11: /* Element: QuoteShortToken Element  */
   if (yyn == 11)
-    /* "Parser.y":136  */
-                                  {yyval = new QuoteNode(((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":138  */
+                                  {yyval = new QuoteNode(((ElementInterface)(yystack.valueAt (0))), (Token) yyval  );};
   break;
 
 
   case 12: /* Element: OpenParenthesisToken Element CommaToken Element TupleElements CloseParenthesisToken  */
   if (yyn == 12)
-    /* "Parser.y":137  */
-                                                                                              {yyval = new TupleNode(((ElementInterface)(yystack.valueAt (4))), ((ElementInterface)(yystack.valueAt (2))), ((ListNode)(yystack.valueAt (1))));};
+    /* "Parser.y":139  */
+                                                                                              {yyval = new TupleNode(((ElementInterface)(yystack.valueAt (4))), ((ElementInterface)(yystack.valueAt (2))), ((ListNode)(yystack.valueAt (1))), (Token) yyval  );};
   break;
 
 
   case 13: /* List: OpenParenthesisToken Element Elements CloseParenthesisToken  */
   if (yyn == 13)
-    /* "Parser.y":140  */
-                                                                      {yyval = new ListNode(((ElementInterface)(yystack.valueAt (2))), ((ListNode)(yystack.valueAt (1))));};
+    /* "Parser.y":142  */
+                                                                      {yyval = new ListNode(((ElementInterface)(yystack.valueAt (2))), ((ListNode)(yystack.valueAt (1))) );};
   break;
 
 
   case 14: /* List: OpenParenthesisToken SpecialForm CloseParenthesisToken  */
   if (yyn == 14)
-    /* "Parser.y":141  */
+    /* "Parser.y":143  */
                                                                  {yyval = ((ElementInterface)(yystack.valueAt (1)));};
   break;
 
 
   case 15: /* List: OpenParenthesisToken CloseParenthesisToken  */
   if (yyn == 15)
-    /* "Parser.y":142  */
+    /* "Parser.y":144  */
                                                      {yyval = new ListNode();};
   break;
 
 
   case 16: /* SpecialForm: QuoteToken Element  */
   if (yyn == 16)
-    /* "Parser.y":145  */
-                             {yyval = new QuoteNode(((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":147  */
+                             {yyval = new QuoteNode(((ElementInterface)(yystack.valueAt (0))), (Token) yyval );};
   break;
 
 
   case 17: /* SpecialForm: DefineToken Atom Type  */
   if (yyn == 17)
-    /* "Parser.y":146  */
+    /* "Parser.y":148  */
                                 {yyval = new DefineNode(((AtomNode)(yystack.valueAt (1))), ((NodeType)(yystack.valueAt (0))));};
   break;
 
 
   case 18: /* SpecialForm: SetQToken Atom Element  */
   if (yyn == 18)
-    /* "Parser.y":147  */
-                                 {yyval = new SetQNode(((AtomNode)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":149  */
+                                 {yyval = new SetQNode(((AtomNode)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))), (Token) yyval);};
   break;
 
 
   case 19: /* SpecialForm: FunctypeToken Atom FunctionType  */
   if (yyn == 19)
-    /* "Parser.y":148  */
+    /* "Parser.y":150  */
                                           {yyval = new FunctypeNode(((AtomNode)(yystack.valueAt (1))), ((FunctionType)(yystack.valueAt (0))));};
   break;
 
 
   case 20: /* SpecialForm: FuncToken Atom List Element  */
   if (yyn == 20)
-    /* "Parser.y":149  */
-                                      {yyval = new FuncNode(((AtomNode)(yystack.valueAt (2))), ((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":151  */
+                                      {yyval = new FuncNode(((AtomNode)(yystack.valueAt (2))), ((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))), (Token) yyval );};
   break;
 
 
   case 21: /* SpecialForm: LambdaToken List Element  */
   if (yyn == 21)
-    /* "Parser.y":150  */
-                                   {yyval = new LambdaNode(((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":152  */
+                                   {yyval = new LambdaNode(((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))), (Token) yyval );};
   break;
 
 
   case 22: /* SpecialForm: ProgToken List Element  */
   if (yyn == 22)
-    /* "Parser.y":151  */
-                                 {yyval = new ProgNode(((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":153  */
+                                 {yyval = new ProgNode(((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))), (Token) yyval );};
   break;
 
 
   case 23: /* SpecialForm: CondToken Element Element Element  */
   if (yyn == 23)
-    /* "Parser.y":152  */
-                                            {yyval = new CondNode(((ElementInterface)(yystack.valueAt (2))), ((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))));};
+    /* "Parser.y":154  */
+                                            {yyval = new CondNode(((ElementInterface)(yystack.valueAt (2))), ((ElementInterface)(yystack.valueAt (1))), ((ElementInterface)(yystack.valueAt (0))), (Token) yyval );};
   break;
 
 
   case 24: /* Type: BaseType  */
   if (yyn == 24)
-    /* "Parser.y":155  */
+    /* "Parser.y":157  */
                    {yyval = ((NodeType)(yystack.valueAt (0)));};
   break;
 
 
   case 25: /* Type: FunctionType  */
   if (yyn == 25)
-    /* "Parser.y":156  */
+    /* "Parser.y":158  */
                        {yyval = ((FunctionType)(yystack.valueAt (0)));};
   break;
 
 
   case 26: /* Types: %empty  */
   if (yyn == 26)
-    /* "Parser.y":159  */
-                      {yyval = new ListOfTypes();};
+    /* "Parser.y":161  */
+                      {yyval = new ListOfTypes((Token) yyval );};
   break;
 
 
   case 27: /* Types: Type Types  */
   if (yyn == 27)
-    /* "Parser.y":160  */
-                     {yyval = new ListOfTypes(((NodeType)(yystack.valueAt (1))), ((ListOfTypes)(yystack.valueAt (0))));};
+    /* "Parser.y":162  */
+                     {yyval = new ListOfTypes(((NodeType)(yystack.valueAt (1))), ((ListOfTypes)(yystack.valueAt (0))), (Token) yyval  );};
   break;
 
 
   case 28: /* TupleTypes: %empty  */
   if (yyn == 28)
-    /* "Parser.y":163  */
-                      {yyval = new ListOfTypes();};
+    /* "Parser.y":165  */
+                      {yyval = new ListOfTypes((Token) yyval );};
   break;
 
 
   case 29: /* TupleTypes: CommaToken Type TupleTypes  */
   if (yyn == 29)
-    /* "Parser.y":164  */
-                                     {yyval = new ListOfTypes(((NodeType)(yystack.valueAt (1))), ((ListOfTypes)(yystack.valueAt (0))));};
+    /* "Parser.y":166  */
+                                     {yyval = new ListOfTypes(((NodeType)(yystack.valueAt (1))), ((ListOfTypes)(yystack.valueAt (0))), (Token) yyval  );};
   break;
 
 
   case 30: /* BaseType: IntToken  */
   if (yyn == 30)
-    /* "Parser.y":167  */
-                   {yyval = new IntType();};
+    /* "Parser.y":169  */
+                   {yyval = new IntType((Token) yyval );};
   break;
 
 
   case 31: /* BaseType: DoubleToken  */
   if (yyn == 31)
-    /* "Parser.y":168  */
-                      {yyval = new DoubleType();};
+    /* "Parser.y":170  */
+                      {yyval = new DoubleType((Token) yyval );};
   break;
 
 
   case 32: /* BaseType: BooleanToken  */
   if (yyn == 32)
-    /* "Parser.y":169  */
-                       {yyval = new BooleanType();};
+    /* "Parser.y":171  */
+                       {yyval = new BooleanType((Token) yyval );};
   break;
 
 
   case 33: /* BaseType: StringToken  */
   if (yyn == 33)
-    /* "Parser.y":170  */
-                      {yyval = new StringType();};
+    /* "Parser.y":172  */
+                      {yyval = new StringType((Token) yyval );};
   break;
 
 
   case 34: /* BaseType: NumToken  */
   if (yyn == 34)
-    /* "Parser.y":171  */
-                   {yyval = new NumType();};
+    /* "Parser.y":173  */
+                   {yyval = new NumType((Token) yyval );};
   break;
 
 
   case 35: /* BaseType: AnyToken  */
   if (yyn == 35)
-    /* "Parser.y":172  */
-                   {yyval = new AnyType();};
+    /* "Parser.y":174  */
+                   {yyval = new AnyType((Token) yyval );};
   break;
 
 
   case 36: /* BaseType: UnitToken  */
   if (yyn == 36)
-    /* "Parser.y":173  */
-                    {yyval = new UnitType();};
+    /* "Parser.y":175  */
+                    {yyval = new UnitType((Token) yyval );};
   break;
 
 
   case 37: /* BaseType: AutoToken  */
   if (yyn == 37)
-    /* "Parser.y":174  */
-                    {yyval = new AutoType();};
+    /* "Parser.y":176  */
+                    {yyval = new AutoType((Token) yyval );};
   break;
 
 
   case 38: /* BaseType: OpenParenthesisToken Type CloseParenthesisToken  */
   if (yyn == 38)
-    /* "Parser.y":175  */
-                                                          {yyval = new ListType(((NodeType)(yystack.valueAt (1))));};
+    /* "Parser.y":177  */
+                                                          {yyval = new ListType(((NodeType)(yystack.valueAt (1))), (Token) yyval  );};
   break;
 
 
   case 39: /* BaseType: OpenParenthesisToken Type CommaToken Type TupleTypes CloseParenthesisToken  */
   if (yyn == 39)
-    /* "Parser.y":176  */
-                                                                                     {yyval = new TupleType(((NodeType)(yystack.valueAt (4))), ((NodeType)(yystack.valueAt (2))), ((ListOfTypes)(yystack.valueAt (1))));};
+    /* "Parser.y":178  */
+                                                                                     {yyval = new TupleType(((NodeType)(yystack.valueAt (4))), ((NodeType)(yystack.valueAt (2))), ((ListOfTypes)(yystack.valueAt (1))), (Token) yyval );};
   break;
 
 
   case 40: /* FunctionType: OpenParenthesisToken Type Types ArrowToken Type CloseParenthesisToken  */
   if (yyn == 40)
-    /* "Parser.y":179  */
-                                                                                {yyval = new FunctionType(((NodeType)(yystack.valueAt (4))), ((ListOfTypes)(yystack.valueAt (3))), ((NodeType)(yystack.valueAt (1))));};
+    /* "Parser.y":181  */
+                                                                                {yyval = new FunctionType(((NodeType)(yystack.valueAt (4))), ((ListOfTypes)(yystack.valueAt (3))), ((NodeType)(yystack.valueAt (1))), (Token) yyval );};
   break;
 
 
   case 41: /* Atom: IdentifierToken  */
   if (yyn == 41)
-    /* "Parser.y":182  */
+    /* "Parser.y":184  */
                           {yyval = new AtomNode(((IdentifierToken)(yystack.valueAt (0))));};
   break;
 
 
   case 42: /* Atom: PlusToken  */
   if (yyn == 42)
-    /* "Parser.y":183  */
+    /* "Parser.y":185  */
                     {yyval = new AtomNode(((PlusToken)(yystack.valueAt (0))));};
   break;
 
 
   case 43: /* Atom: MinusToken  */
   if (yyn == 43)
-    /* "Parser.y":184  */
+    /* "Parser.y":186  */
                      {yyval = new AtomNode(((MinusToken)(yystack.valueAt (0))));};
   break;
 
 
   case 44: /* Atom: TimesToken  */
   if (yyn == 44)
-    /* "Parser.y":185  */
+    /* "Parser.y":187  */
                      {yyval = new AtomNode(((TimesToken)(yystack.valueAt (0))));};
   break;
 
 
   case 45: /* Atom: DivideToken  */
   if (yyn == 45)
-    /* "Parser.y":186  */
+    /* "Parser.y":188  */
                       {yyval = new AtomNode(((DivideToken)(yystack.valueAt (0))));};
   break;
 
 
   case 46: /* Atom: HeadToken  */
   if (yyn == 46)
-    /* "Parser.y":187  */
+    /* "Parser.y":189  */
                     {yyval = new AtomNode(((HeadToken)(yystack.valueAt (0))));};
   break;
 
 
   case 47: /* Atom: TailToken  */
   if (yyn == 47)
-    /* "Parser.y":188  */
+    /* "Parser.y":190  */
                     {yyval = new AtomNode(((TailToken)(yystack.valueAt (0))));};
   break;
 
 
   case 48: /* Atom: ConsToken  */
   if (yyn == 48)
-    /* "Parser.y":189  */
+    /* "Parser.y":191  */
                     {yyval = new AtomNode(((ConsToken)(yystack.valueAt (0))));};
   break;
 
 
   case 49: /* Atom: EqualToken  */
   if (yyn == 49)
-    /* "Parser.y":190  */
+    /* "Parser.y":192  */
                      {yyval = new AtomNode(((EqualToken)(yystack.valueAt (0))));};
   break;
 
 
   case 50: /* Atom: NonEqualToken  */
   if (yyn == 50)
-    /* "Parser.y":191  */
+    /* "Parser.y":193  */
                         {yyval = new AtomNode(((NonEqualToken)(yystack.valueAt (0))));};
   break;
 
 
   case 51: /* Atom: LessToken  */
   if (yyn == 51)
-    /* "Parser.y":192  */
+    /* "Parser.y":194  */
                     {yyval = new AtomNode(((LessToken)(yystack.valueAt (0))));};
   break;
 
 
   case 52: /* Atom: LessEqToken  */
   if (yyn == 52)
-    /* "Parser.y":193  */
+    /* "Parser.y":195  */
                       {yyval = new AtomNode(((LessEqToken)(yystack.valueAt (0))));};
   break;
 
 
   case 53: /* Atom: GreaterToken  */
   if (yyn == 53)
-    /* "Parser.y":194  */
+    /* "Parser.y":196  */
                        {yyval = new AtomNode(((GreaterToken)(yystack.valueAt (0))));};
   break;
 
 
   case 54: /* Atom: GreaterEqToken  */
   if (yyn == 54)
-    /* "Parser.y":195  */
+    /* "Parser.y":197  */
                          {yyval = new AtomNode(((GreaterEqToken)(yystack.valueAt (0))));};
   break;
 
 
   case 55: /* Atom: IsIntToken  */
   if (yyn == 55)
-    /* "Parser.y":196  */
+    /* "Parser.y":198  */
                      {yyval = new AtomNode(((IsIntToken)(yystack.valueAt (0))));};
   break;
 
 
   case 56: /* Atom: IsRealToken  */
   if (yyn == 56)
-    /* "Parser.y":197  */
+    /* "Parser.y":199  */
                       {yyval = new AtomNode(((IsRealToken)(yystack.valueAt (0))));};
   break;
 
 
   case 57: /* Atom: IsBoolToken  */
   if (yyn == 57)
-    /* "Parser.y":198  */
+    /* "Parser.y":200  */
                       {yyval = new AtomNode(((IsBoolToken)(yystack.valueAt (0))));};
   break;
 
 
   case 58: /* Atom: IsAtomToken  */
   if (yyn == 58)
-    /* "Parser.y":199  */
+    /* "Parser.y":201  */
                       {yyval = new AtomNode(((IsAtomToken)(yystack.valueAt (0))));};
   break;
 
 
   case 59: /* Atom: IsListToken  */
   if (yyn == 59)
-    /* "Parser.y":200  */
+    /* "Parser.y":202  */
                       {yyval = new AtomNode(((IsListToken)(yystack.valueAt (0))));};
   break;
 
 
   case 60: /* Atom: AndToken  */
   if (yyn == 60)
-    /* "Parser.y":201  */
+    /* "Parser.y":203  */
                    {yyval = new AtomNode(((AndToken)(yystack.valueAt (0))));};
   break;
 
 
   case 61: /* Atom: OrToken  */
   if (yyn == 61)
-    /* "Parser.y":202  */
+    /* "Parser.y":204  */
                   {yyval = new AtomNode(((OrToken)(yystack.valueAt (0))));};
   break;
 
 
   case 62: /* Atom: XorToken  */
   if (yyn == 62)
-    /* "Parser.y":203  */
+    /* "Parser.y":205  */
                    {yyval = new AtomNode(((XorToken)(yystack.valueAt (0))));};
   break;
 
 
   case 63: /* Atom: NotToken  */
   if (yyn == 63)
-    /* "Parser.y":204  */
+    /* "Parser.y":206  */
                    {yyval = new AtomNode(((NotToken)(yystack.valueAt (0))));};
   break;
 
 
   case 64: /* Atom: EvalToken  */
   if (yyn == 64)
-    /* "Parser.y":205  */
+    /* "Parser.y":207  */
                     {yyval = new AtomNode(((EvalToken)(yystack.valueAt (0))));};
   break;
 
 
   case 65: /* Literal: IntegerNumberLiteralToken  */
   if (yyn == 65)
-    /* "Parser.y":208  */
+    /* "Parser.y":210  */
                                     {yyval = new LiteralNode(((IntegerNumberLiteralToken)(yystack.valueAt (0))));};
   break;
 
 
   case 66: /* Literal: RealNumberLiteralToken  */
   if (yyn == 66)
-    /* "Parser.y":209  */
+    /* "Parser.y":211  */
                                  {yyval = new LiteralNode(((RealNumberLiteralToken)(yystack.valueAt (0))));};
   break;
 
 
   case 67: /* Literal: BooleanLiteralToken  */
   if (yyn == 67)
-    /* "Parser.y":210  */
+    /* "Parser.y":212  */
                               {yyval = new LiteralNode(((BooleanLiteralToken)(yystack.valueAt (0))));};
   break;
 
 
   case 68: /* Literal: StringLiteralToken  */
   if (yyn == 68)
-    /* "Parser.y":211  */
+    /* "Parser.y":213  */
                              {yyval = new LiteralNode(((StringLiteralToken)(yystack.valueAt (0))));};
   break;
 
 
 
-/* "Parser.java":1100  */
+/* "Parser.java":1102  */
 
         default: break;
       }
@@ -1707,7 +1709,7 @@ private static final byte[] yycheck_ = yycheck_init();
   private static final int YYNTOKENS_ = 55;
 
 /* Unqualified %code blocks.  */
-/* "Parser.y":35  */
+/* "Parser.y":37  */
 
 	static AST ast;
         public static AST makeAST(String sourceProgramPath) throws IOException {
@@ -1718,8 +1720,8 @@ private static final byte[] yycheck_ = yycheck_init();
 		return ast;
 	}
 
-/* "Parser.java":1722  */
+/* "Parser.java":1724  */
 
 }
-/* "Parser.y":213  */
+/* "Parser.y":215  */
 

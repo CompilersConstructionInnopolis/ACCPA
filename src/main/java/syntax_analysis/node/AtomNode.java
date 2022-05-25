@@ -9,17 +9,34 @@ public class AtomNode implements ElementInterface {
     public String name;
     public ElementInterface value;
     public NodeType type;
+    public Token token;
+
+    public AtomNode(String name,
+                    ElementInterface value,
+                    NodeType type) {
+        this.name = name;
+        this.value = value;
+        this.type = type;
+    }
 
     public AtomNode(Token token) {
         name = token.getContent();
         value = null;
         type = null;
+        this.token = token;
     }
 
     public AtomNode(String name, ElementInterface value) {
         this.name = name;
         this.value = value;
     }
+
+    public AtomNode(String name, ElementInterface value, Token token) {
+        this.name = name;
+        this.value = value;
+        this.token = token;
+    }
+
 
     @Override
     public ElementInterface evaluate() {

@@ -3,6 +3,7 @@ package syntax_analysis.node.special_form;
 import interpreter.AtomsTable;
 import interpreter.DefinedFunction;
 import interpreter.PredefinedFunction;
+import lexical_analysis.tokens.Token;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.type_node.*;
@@ -11,9 +12,17 @@ public class SetQNode implements ElementInterface {
     AtomNode atom;
     ElementInterface element;
 
+    Token token;
+
     public SetQNode(AtomNode atom, ElementInterface element) {
         this.atom = atom;
         this.element = element;
+    }
+
+    public SetQNode(AtomNode atom, ElementInterface element, Token token) {
+        this.atom = atom;
+        this.element = element;
+        this.token = token;
     }
 
     @Override
@@ -73,6 +82,7 @@ public class SetQNode implements ElementInterface {
         return "SetQ{" +
                 "atom=" + atom +
                 ", element=" + element +
+                ", token=" + token +
                 '}';
     }
 }

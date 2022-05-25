@@ -1,5 +1,6 @@
 package syntax_analysis.node;
 
+import lexical_analysis.tokens.Token;
 import lexical_analysis.tokens.literal.*;
 import syntax_analysis.node.type_node.*;
 
@@ -8,6 +9,7 @@ public class LiteralNode implements ElementInterface {
     public Double doubleValue;
     public Boolean booleanValue;
 
+    public Token token;
     public String stringValue;
 
     public LiteralNode() {
@@ -29,6 +31,12 @@ public class LiteralNode implements ElementInterface {
         stringValue = value;
     }
 
+
+    public LiteralNode(String value, Token token) {
+        stringValue = value;
+        this.token = token;
+    }
+
     public LiteralNode(LiteralToken token) {
         String content = token.getContent();
         if (token instanceof IntegerNumberLiteralToken) {
@@ -40,6 +48,7 @@ public class LiteralNode implements ElementInterface {
         } else if (token instanceof StringLiteralToken) {
             this.stringValue = content;
         }
+        this.token = token;
     }
 
     public Object getValue() {

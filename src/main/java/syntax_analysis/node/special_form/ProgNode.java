@@ -2,6 +2,7 @@ package syntax_analysis.node.special_form;
 
 import interpreter.AtomsTable;
 import interpreter.FunctionsTable;
+import lexical_analysis.tokens.Token;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.FunctionAtom;
@@ -12,9 +13,17 @@ public class ProgNode implements ElementInterface {
     ElementInterface arguments;
     ElementInterface elements;
 
+    Token token;
+
     public ProgNode(ElementInterface arguments, ElementInterface elements) {
         this.arguments = arguments;
         this.elements = elements;
+    }
+
+    public ProgNode(ElementInterface arguments, ElementInterface elements, Token token) {
+        this.arguments = arguments;
+        this.elements = elements;
+        this.token = token;
     }
 
     @Override

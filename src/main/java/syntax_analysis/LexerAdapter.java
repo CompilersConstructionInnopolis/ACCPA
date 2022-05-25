@@ -3,6 +3,7 @@ package syntax_analysis;
 import lexical_analysis.Lexer;
 import lexical_analysis.tokens.Token;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -13,6 +14,9 @@ public class LexerAdapter implements Parser.Lexer {
     final private List<Token> tokens;
     private int currentTokenIndex;
     private Token currentToken;
+
+    private final String RUNNABLE_PROGRAM_PATH = "code/run.txt";
+    private File runnableFile = new File(RUNNABLE_PROGRAM_PATH);
 
     public LexerAdapter(FileReader fileReader) throws IOException {
         Lexer lexer = new Lexer(fileReader);
@@ -49,6 +53,12 @@ public class LexerAdapter implements Parser.Lexer {
 
     @Override
     public void yyerror(String msg) {
-        System.out.println(msg);
+        if (currentToken == null) {
+            runnableFile.delete();
+            System.exit(1);
+        }
+        System.out.println("Syntax error!\n" + "At " + currentToken);
+        runnableFile.delete();
+        System.exit(1);
     }
 }

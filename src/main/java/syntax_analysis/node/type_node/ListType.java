@@ -1,10 +1,19 @@
 package syntax_analysis.node.type_node;
 
+import lexical_analysis.tokens.Token;
+
 public class ListType implements NodeType {
     public NodeType elementType;
 
+    public Token token;
+
     public ListType(NodeType elementType) {
         this.elementType = elementType;
+    }
+
+    public ListType(NodeType elementType, Token token) {
+        this.elementType = elementType;
+        this.token = token;
     }
 
     @Override

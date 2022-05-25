@@ -1,19 +1,36 @@
 package syntax_analysis.node.type_node;
 
+import lexical_analysis.tokens.Token;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfTypes implements NodeType {
     public List<NodeType> elements;
+    public Token token;
 
     public ListOfTypes() {
         elements = new ArrayList<>();
     }
 
+
     public ListOfTypes(NodeType element, ListOfTypes list) {
         elements = new ArrayList<>();
         elements.add(element);
         elements.addAll(list.elements);
+    }
+
+    public ListOfTypes(Token token) {
+        elements = new ArrayList<>();
+        this.token = token;
+    }
+
+
+    public ListOfTypes(NodeType element, ListOfTypes list, Token token) {
+        elements = new ArrayList<>();
+        elements.add(element);
+        elements.addAll(list.elements);
+        this.token = token;
     }
 
     @Override

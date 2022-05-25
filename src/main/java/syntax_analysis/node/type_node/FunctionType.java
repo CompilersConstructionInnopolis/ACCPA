@@ -1,5 +1,7 @@
 package syntax_analysis.node.type_node;
 
+import lexical_analysis.tokens.Token;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +9,21 @@ public class FunctionType implements NodeType {
     public List<NodeType> argumentType;
     public NodeType returnType;
 
+    public Token token;
+
     public FunctionType(NodeType arg, ListOfTypes restArgs, NodeType returnType) {
         this.argumentType = new ArrayList<>();
         this.argumentType.add(arg);
         this.argumentType.addAll(restArgs.elements);
         this.returnType = returnType;
+    }
+
+    public FunctionType(NodeType arg, ListOfTypes restArgs, NodeType returnType, Token token) {
+        this.argumentType = new ArrayList<>();
+        this.argumentType.add(arg);
+        this.argumentType.addAll(restArgs.elements);
+        this.returnType = returnType;
+        this.token = token;
     }
 
     public boolean isEqualType(FunctionType other) {
