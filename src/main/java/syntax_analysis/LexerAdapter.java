@@ -53,6 +53,10 @@ public class LexerAdapter implements Parser.Lexer {
 
     @Override
     public void yyerror(String msg) {
+        if (currentToken == null) {
+            runnableFile.delete();
+            System.exit(1);
+        }
         System.out.println("Syntax error!\n" + "At " + currentToken);
         runnableFile.delete();
         System.exit(1);

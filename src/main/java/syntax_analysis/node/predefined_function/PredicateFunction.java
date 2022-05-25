@@ -4,6 +4,7 @@ import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.ListNode;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class PredicateFunction implements ElementInterface {
     ElementInterface element;
@@ -18,6 +19,12 @@ public class PredicateFunction implements ElementInterface {
     public ElementInterface evaluate() {
         ElementInterface evaluatedElement = element.evaluate();
         return this.performOperation(evaluatedElement);
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
     }
 
     private LiteralNode performOperation(ElementInterface evaluatedElement) {

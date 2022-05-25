@@ -1,6 +1,8 @@
 package syntax_analysis.node;
 
 import interpreter.AtomsTable;
+import lexical_analysis.tokens.Token;
+import syntax_analysis.node.type_node.NodeType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +13,18 @@ public class FunctionAtom implements ElementInterface {
     private final ElementInterface body;
     List<ElementInterface> parameters;
 
+    Token token;
+
 
     public FunctionAtom(List<AtomNode> arguments, ElementInterface body) {
         this.arguments = arguments;
         this.body = body;
+    }
+
+    public FunctionAtom(List<AtomNode> arguments, ElementInterface body, Token token) {
+        this.arguments = arguments;
+        this.body = body;
+        this.token = token;
     }
 
     public static boolean checkFunctionArguments(ElementInterface argumentsList) {
@@ -51,6 +61,12 @@ public class FunctionAtom implements ElementInterface {
         ElementInterface result = body.evaluate();
         AtomsTable.getInstance().leaveLocalContext();
         return result;
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
     }
 
     public int getArgumentsNumber() {

@@ -2,19 +2,30 @@ package syntax_analysis.node.special_form;
 
 import interpreter.AtomsTable;
 import interpreter.FunctionsTable;
+import lexical_analysis.tokens.Token;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.FunctionAtom;
+import syntax_analysis.node.type_node.NodeType;
 
 public class FuncNode implements ElementInterface {
     AtomNode functionName;
     ElementInterface argumentsList;
     ElementInterface functionBody;
 
+    Token token;
+
     public FuncNode(AtomNode functionName, ElementInterface argumentsList, ElementInterface functionBody) {
         this.functionName = functionName;
         this.argumentsList = argumentsList;
         this.functionBody = functionBody;
+    }
+
+    public FuncNode(AtomNode functionName, ElementInterface argumentsList, ElementInterface functionBody, Token token) {
+        this.functionName = functionName;
+        this.argumentsList = argumentsList;
+        this.functionBody = functionBody;
+        this.token = token;
     }
 
     @Override
@@ -36,11 +47,18 @@ public class FuncNode implements ElementInterface {
     }
 
     @Override
+    public NodeType getReturnType() {
+        // todo
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "FuncNode{" +
                 "atom=" + functionName +
                 ", list=" + argumentsList +
                 ", element=" + functionBody +
+                ", token=" + token +
                 '}';
     }
 }

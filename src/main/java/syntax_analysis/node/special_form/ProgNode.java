@@ -2,18 +2,28 @@ package syntax_analysis.node.special_form;
 
 import interpreter.AtomsTable;
 import interpreter.FunctionsTable;
+import lexical_analysis.tokens.Token;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.FunctionAtom;
 import syntax_analysis.node.ListNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class ProgNode implements ElementInterface {
     ElementInterface arguments;
     ElementInterface elements;
 
+    Token token;
+
     public ProgNode(ElementInterface arguments, ElementInterface elements) {
         this.arguments = arguments;
         this.elements = elements;
+    }
+
+    public ProgNode(ElementInterface arguments, ElementInterface elements, Token token) {
+        this.arguments = arguments;
+        this.elements = elements;
+        this.token = token;
     }
 
     @Override
@@ -30,29 +40,24 @@ public class ProgNode implements ElementInterface {
             AtomsTable.getInstance().addAtom(atom);
         }
         if (elements instanceof ListNode) {
+            ElementInterface returnResult = null;
             for (ElementInterface element : ((ListNode) this.elements).elements) {
-                ElementInterface evaluatedElement = element.evaluate();
-                if (evaluatedElement instanceof ReturnNode) {
-                    ElementInterface returnResult = ((ReturnNode) evaluatedElement).element.evaluate();
-                    AtomsTable.getInstance().leaveLocalContext();
-                    FunctionsTable.getInstance().leaveLocalContext();
-                    return returnResult;
-                }
+                returnResult = element.evaluate();
             }
+            AtomsTable.getInstance().leaveLocalContext();
+            FunctionsTable.getInstance().leaveLocalContext();
+            return returnResult;
         } else {
             ElementInterface evaluatedElement = elements.evaluate();
-            if (evaluatedElement instanceof ReturnNode) {
-                ElementInterface returnResult = ((ReturnNode) evaluatedElement).element.evaluate();
-                AtomsTable.getInstance().leaveLocalContext();
-                FunctionsTable.getInstance().leaveLocalContext();
-                return returnResult;
-            }
             AtomsTable.getInstance().leaveLocalContext();
             FunctionsTable.getInstance().leaveLocalContext();
             return evaluatedElement;
         }
-        AtomsTable.getInstance().leaveLocalContext();
-        FunctionsTable.getInstance().leaveLocalContext();
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
         return null;
     }
 

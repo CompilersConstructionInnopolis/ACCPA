@@ -3,6 +3,7 @@ package syntax_analysis.node.predefined_function;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.ListNode;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.NodeType;
 
 public class OperationOnListFunction implements ElementInterface {
 
@@ -72,6 +73,13 @@ public class OperationOnListFunction implements ElementInterface {
             default:
                 throw new RuntimeException("Unknown list operation: " + operation);
         }
+    }
+
+    @Override
+    public NodeType getReturnType() {
+        // todo
+
+        return null;
     }
 
     @Override

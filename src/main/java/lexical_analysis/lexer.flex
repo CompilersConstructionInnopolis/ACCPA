@@ -1,29 +1,31 @@
 package lexical_analysis;
 
+import lexical_analysis.tokens.EvalToken;
+import lexical_analysis.tokens.IdentifierToken;
 import lexical_analysis.tokens.Token;
 import lexical_analysis.tokens.arithmetic_function.DivideToken;
 import lexical_analysis.tokens.arithmetic_function.MinusToken;
 import lexical_analysis.tokens.arithmetic_function.PlusToken;
 import lexical_analysis.tokens.arithmetic_function.TimesToken;
-import lexical_analysis.tokens.parenthesis.CloseParenthesisToken;
-import lexical_analysis.tokens.parenthesis.OpenParenthesisToken;
-import lexical_analysis.tokens.keyword.QuoteShortToken;
+import lexical_analysis.tokens.base_type.*;
 import lexical_analysis.tokens.comparison.*;
-import lexical_analysis.tokens.EvalToken;
-import lexical_analysis.tokens.IdentifierToken;
 import lexical_analysis.tokens.keyword.*;
+import lexical_analysis.tokens.literal.BooleanLiteralToken;
+import lexical_analysis.tokens.literal.IntegerNumberLiteralToken;
+import lexical_analysis.tokens.literal.RealNumberLiteralToken;
+import lexical_analysis.tokens.literal.StringLiteralToken;
 import lexical_analysis.tokens.logical_operator.AndToken;
 import lexical_analysis.tokens.logical_operator.NotToken;
 import lexical_analysis.tokens.logical_operator.OrToken;
 import lexical_analysis.tokens.logical_operator.XorToken;
-import lexical_analysis.tokens.literal.IntegerNumberLiteralToken;
-import lexical_analysis.tokens.literal.RealNumberLiteralToken;
-import lexical_analysis.tokens.literal.BooleanLiteralToken;
-import lexical_analysis.tokens.literal.NullLiteralToken;
 import lexical_analysis.tokens.operation_on_lists.ConsToken;
 import lexical_analysis.tokens.operation_on_lists.HeadToken;
 import lexical_analysis.tokens.operation_on_lists.TailToken;
+import lexical_analysis.tokens.parenthesis.CloseParenthesisToken;
+import lexical_analysis.tokens.parenthesis.OpenParenthesisToken;
 import lexical_analysis.tokens.predicate.*;
+import lexical_analysis.tokens.symbol.ArrowToken;
+import lexical_analysis.tokens.symbol.CommaToken;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -48,6 +50,8 @@ OpenBrace = [(]
 CloseBrace = [)]
 QuoteShort = [']
 Comment = (;)
+Arrow = (->)
+Comma = (,)
 
 Quote = (quote)
 Setq = (setq)
@@ -55,9 +59,20 @@ Func = (func)
 Lambda = (lambda)
 Prog = (prog)
 Cond =(cond)
-While = (while)
-Return = (return)
-Break = (break)
+Define = (define)
+Functype = (functype)
+Let = (let)
+GetAt = (getAt)
+SetAt = (setAt)
+
+Int = (Int)
+Double = (Double)
+Boolean = (Boolean)
+String = (String)
+Num = (Num)
+Unit = (Unit)
+Any = (Any)
+Auto = (Auto)
 
 Plus = (plus)
 Minus = (minus)
@@ -78,7 +93,7 @@ GreaterEq = (greatereq)
 IsInt = (isint)
 IsReal = (isreal)
 IsBool = (isbool)
-IsNull = (isnull)
+IsString = (isstring)
 IsAtom = (isatom)
 IsList = (islist)
 
@@ -92,10 +107,10 @@ Eval = (eval)
 IntegerNumberLiteral = -{0,1}[0-9]+
 RealNumberLiteral = -{0,1}[0-9]+[.][0-9]+
 BooleanLiteral = (false|true)
-NullLiteral = (null)
+StringLiteral = \"[[a-zA-Z]*[0-9]*]*\"
 
-Identifier = [a-zA-Z]+[[a-zA-Z]*[0-9]*]*
-IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
+Identifier = [_]*[a-zA-Z]+[[a-zA-Z]*[0-9]*[_]*]*
+IllegalIdentifier = [0-9]+[[_]*[a-zA-Z]*[0-9]*]*
 
 
 %{
@@ -137,17 +152,19 @@ IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
 
 {OpenBrace}  {addToken(OpenParenthesisToken.class, yyline, yycolumn, yytext());}
 {CloseBrace} {addToken(CloseParenthesisToken.class, yyline, yycolumn, yytext());}
+{Arrow} {addToken(ArrowToken.class, yyline, yycolumn, yytext());}
+{Comma} {addToken(CommaToken.class, yyline, yycolumn, yytext());}
 {Setq} {addToken(SetQToken.class, yyline, yycolumn, yytext());}
 {QuoteShort} {addToken(QuoteShortToken.class, yyline, yycolumn, yytext());}
 {Quote} {addToken(QuoteToken.class, yyline, yycolumn, yytext());}
+{Define} {addToken(DefineToken.class, yyline, yycolumn, yytext());}
 {Setq} {addToken(SetQToken.class, yyline, yycolumn, yytext());}
 {Func} {addToken(FuncToken.class, yyline, yycolumn, yytext());}
+{Functype} {addToken(FunctypeToken.class, yyline, yycolumn, yytext());}
 {Lambda} {addToken(LambdaToken.class, yyline, yycolumn, yytext());}
 {Prog} {addToken(ProgToken.class, yyline, yycolumn, yytext());}
+{Let} {addToken(LetToken.class, yyline, yycolumn, yytext());}
 {Cond} {addToken(CondToken.class, yyline, yycolumn, yytext());}
-{While} {addToken(WhileToken.class, yyline, yycolumn, yytext());}
-{Return} {addToken(ReturnToken.class, yyline, yycolumn, yytext());}
-{Break} {addToken(BreakToken.class, yyline, yycolumn, yytext());}
 {Plus} {addToken(PlusToken.class, yyline, yycolumn, yytext());}
 {Minus} {addToken(MinusToken.class, yyline, yycolumn, yytext());}
 {Times} {addToken(TimesToken.class, yyline, yycolumn, yytext());}
@@ -155,6 +172,8 @@ IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
 {Head} {addToken(HeadToken.class, yyline, yycolumn, yytext());}
 {Tail} {addToken(TailToken.class, yyline, yycolumn, yytext());}
 {Cons} {addToken(ConsToken.class, yyline, yycolumn, yytext());}
+{GetAt} {addToken(GetAtToken.class, yyline, yycolumn, yytext());}
+{SetAt} {addToken(SetAtToken.class, yyline, yycolumn, yytext());}
 {Equal} {addToken(EqualToken.class, yyline, yycolumn, yytext());}
 {NonEqual} {addToken(NonEqualToken.class, yyline, yycolumn, yytext());}
 {Less} {addToken(LessToken.class, yyline, yycolumn, yytext());}
@@ -164,7 +183,7 @@ IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
 {IsInt} {addToken(IsIntToken.class, yyline, yycolumn, yytext());}
 {IsReal} {addToken(IsRealToken.class, yyline, yycolumn, yytext());}
 {IsBool} {addToken(IsBoolToken.class, yyline, yycolumn, yytext());}
-{IsNull} {addToken(IsNullToken.class, yyline, yycolumn, yytext());}
+{IsString} {addToken(IsStringToken.class, yyline, yycolumn, yytext());}
 {IsAtom} {addToken(IsAtomToken.class, yyline, yycolumn, yytext());}
 {IsList} {addToken(IsListToken.class, yyline, yycolumn, yytext());}
 {And} {addToken(AndToken.class, yyline, yycolumn, yytext());}
@@ -172,10 +191,18 @@ IllegalIdentifier = [0-9]+[[a-zA-Z]*[0-9]*]*
 {Xor} {addToken(XorToken.class, yyline, yycolumn, yytext());}
 {Not} {addToken(NotToken.class, yyline, yycolumn, yytext());}
 {Eval} {addToken(EvalToken.class, yyline, yycolumn, yytext());}
+{Int} {addToken(IntToken.class, yyline, yycolumn, yytext());}
+{Double} {addToken(DoubleToken.class, yyline, yycolumn, yytext());}
+{Boolean} {addToken(BooleanToken.class, yyline, yycolumn, yytext());}
+{String} {addToken(StringToken.class, yyline, yycolumn, yytext());}
+{Num} {addToken(NumToken.class, yyline, yycolumn, yytext());}
+{Unit} {addToken(UnitToken.class, yyline, yycolumn, yytext());}
+{Any} {addToken(AnyToken.class, yyline, yycolumn, yytext());}
+{Auto} {addToken(AutoToken.class, yyline, yycolumn, yytext());}
 {IntegerNumberLiteral} {addToken(IntegerNumberLiteralToken.class, yyline, yycolumn, yytext());}
 {RealNumberLiteral} {addToken(RealNumberLiteralToken.class, yyline, yycolumn, yytext());}
 {BooleanLiteral} {addToken(BooleanLiteralToken.class, yyline, yycolumn, yytext());}
-{NullLiteral} {addToken(NullLiteralToken.class, yyline, yycolumn, yytext());}
+{StringLiteral} {addToken(StringLiteralToken.class, yyline, yycolumn, yytext());}
 {Identifier} {addToken(IdentifierToken.class, yyline, yycolumn, yytext());}
 {IllegalIdentifier} {printIllegalIdentifierError(yyline, yycolumn, yytext());}
 {Comment} {isCommentLine = true;}
