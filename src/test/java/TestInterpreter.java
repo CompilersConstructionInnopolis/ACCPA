@@ -105,12 +105,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testSetQNull() throws IOException {
-        String programName = programsDirectory + setQDirectory + "setq_null.txt";
-        String expected = "null\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testSetQList1() throws IOException {
@@ -307,30 +301,18 @@ public class TestInterpreter {
     @Test
     void testProg1() throws IOException {
         String programName = programsDirectory + progDirectory + "prog1.txt";
-        String expected = "";
+        String expected = "'(5 6)\n";
         runCompilerEquals(programName, expected);
     }
 
     @Test
     void testProg2() throws IOException {
         String programName = programsDirectory + progDirectory + "prog2.txt";
-        String expected = "'(55 55)\n";
+        String expected = "'(5 6)\n'(55 55)\n";
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testProg3() throws IOException {
-        String programName = programsDirectory + progDirectory + "prog3.txt";
-        String expected = "'(5 6)\n";
-        runCompilerEquals(programName, expected);
-    }
 
-    @Test
-    void testCond1() throws IOException {
-        String programName = programsDirectory + condDirectory + "cond1.txt";
-        String expected = "24\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testCond2() throws IOException {
@@ -346,55 +328,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testCond4() throws IOException {
-        String programName = programsDirectory + condDirectory + "cond4.txt";
-        String expected = "5\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testCond5() throws IOException {
-        String programName = programsDirectory + condDirectory + "cond5.txt";
-        String expected = "null\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testWhile1() throws IOException {
-        String programName = programsDirectory + whileDirectory + "while1.txt";
-        String expected = "512\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testWhile2() throws IOException {
-        String programName = programsDirectory + whileDirectory + "while2.txt";
-        String expected = "'('(0 1) '(0 0))\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testBreak1() throws IOException {
-        String programName = programsDirectory + breakReturnDirectory + "break1.txt";
-        String expected = "8\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testBreak2() throws IOException {
-        String programName = programsDirectory + breakReturnDirectory + "break2.txt";
-        String expected = "1\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testReturn1() throws IOException {
-        String programName = programsDirectory + breakReturnDirectory + "return1.txt";
-        String expected = "1\n" +
-                "8\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testPlusIntegers() throws IOException {
@@ -504,7 +437,7 @@ public class TestInterpreter {
     @Test
     void testTailLiterals() throws IOException {
         String programName = programsDirectory + operationsOnListDirectory + "tail_literals.txt";
-        String expected = "'(2.4 true false null)\n";
+        String expected = "'(2.4 true false)\n";
         runCompilerEquals(programName, expected);
     }
 
@@ -532,13 +465,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testConsAtoms() throws IOException {
-        String programName = programsDirectory + operationsOnListDirectory + "cons_atoms.txt";
-        String expected = "'(true 2 null false -7.0)\n" +
-                "'(true 5 2 null)\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testConsEmptyListLiteral() throws IOException {
@@ -642,12 +568,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testIsInt6() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isint6.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testIsInt7() throws IOException {
@@ -719,12 +639,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testIsReal7() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isreal7.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testIsReal8() throws IOException {
@@ -782,12 +696,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testIsBool5() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isbool5.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testIsBool6() throws IOException {
@@ -824,61 +732,6 @@ public class TestInterpreter {
         runCompilerException(programName, expectedMessage);
     }
 
-    @Test
-    void testIsNull1() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull1.txt";
-        String expected = "true\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull2() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull2.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull3() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull3.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull4() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull4.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull5() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull5.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull6() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull6.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNull7() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull7.txt";
-        String expected = "true\n";
-        runCompilerEquals(programName, expected);
-    }
-
-    @Test
-    void testIsNullException() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isnull_exception.txt";
-        String expectedMessage = "Predicate function must have one parameter!";
-        runCompilerException(programName, expectedMessage);
-    }
 
     @Test
     void testIsAtom1() throws IOException {
@@ -922,13 +775,7 @@ public class TestInterpreter {
         String expected = "false\n";
         runCompilerEquals(programName, expected);
     }
-
-    @Test
-    void testIsAtom7() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isatom7.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
+    
 
     @Test
     void testIsAtom8() throws IOException {
@@ -944,19 +791,7 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testIsAtom10() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isatom10.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
 
-    @Test
-    void testIsAtom11() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "isatom11.txt";
-        String expected = "true\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testIsAtomException() throws IOException {
@@ -1021,12 +856,6 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testIsList9() throws IOException {
-        String programName = programsDirectory + predicatesDirectory + "islist9.txt";
-        String expected = "false\n";
-        runCompilerEquals(programName, expected);
-    }
 
     @Test
     void testIsList10() throws IOException {
@@ -1126,12 +955,6 @@ public class TestInterpreter {
         runCompilerException(programName, expectedMessage);
     }
 
-    @Test
-    void testAndException5() throws IOException {
-        String programName = programsDirectory + logicalOperatorsDirectory + "and_exception5.txt";
-        String expectedMessage = "Literal value must be boolean. Provided: null";
-        runCompilerException(programName, expectedMessage);
-    }
 
     @Test
     void testOr1() throws IOException {
@@ -1196,12 +1019,6 @@ public class TestInterpreter {
         runCompilerException(programName, expectedMessage);
     }
 
-    @Test
-    void testOrException5() throws IOException {
-        String programName = programsDirectory + logicalOperatorsDirectory + "or_exception5.txt";
-        String expectedMessage = "Literal value must be boolean. Provided: null";
-        runCompilerException(programName, expectedMessage);
-    }
 
     @Test
     void testXor1() throws IOException {
@@ -1266,12 +1083,6 @@ public class TestInterpreter {
         runCompilerException(programName, expectedMessage);
     }
 
-    @Test
-    void testXorException5() throws IOException {
-        String programName = programsDirectory + logicalOperatorsDirectory + "xor_exception5.txt";
-        String expectedMessage = "Literal value must be boolean. Provided: null";
-        runCompilerException(programName, expectedMessage);
-    }
 
     @Test
     void testNot1() throws IOException {
@@ -1329,12 +1140,6 @@ public class TestInterpreter {
         runCompilerException(programName, expectedMessage);
     }
 
-    @Test
-    void testNotException5() throws IOException {
-        String programName = programsDirectory + logicalOperatorsDirectory + "not_exception5.txt";
-        String expectedMessage = "Literal value must be boolean. Provided: null";
-        runCompilerException(programName, expectedMessage);
-    }
 
     @Test
     void testEval2() throws IOException {
@@ -1350,12 +1155,7 @@ public class TestInterpreter {
         runCompilerEquals(programName, expected);
     }
 
-    @Test
-    void testEval4() throws IOException {
-        String programName = programsDirectory + evalDirectory + "eval4.txt";
-        String expected = "null\n";
-        runCompilerEquals(programName, expected);
-    }
+
 
     @Test
     void testEval5() throws IOException {

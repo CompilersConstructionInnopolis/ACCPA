@@ -1,33 +1,10 @@
-import std.txt
-
-(sort (1000 -1000 213 2 1))
-(reverse (1 2 3 4 5))
-(define x Int)
-(setq x 3)
-x
-(setq x 6)
-x
-;(setq x 6.3)
-;x
-
-(setq y 4)
-y
-;(setq y true)
-;y
-
-;(define z Num)
-;(define z Any)
-;(define z Unit)
-
-(define z Auto)
-(setq z 3)
-z
-;(setq z 3.6)
-
-(define a Int)
-(setq a y)
-a
-(setq y 77)
-a
-y
-
+quote ' setq func lambda prog cond
+plus minus times divide
+head tail cons
+equal nonequal less lesseq greater greatereq
+isint isreal isbool isatom islist
+and or xor not
+eval
+123 -543 2.3 -42.2 true false
+( )
+; this is a comment

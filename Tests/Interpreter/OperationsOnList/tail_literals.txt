@@ -1,1 +1,1 @@
-(tail (1 2.4 true false null))
+(tail (1 2.4 true false))

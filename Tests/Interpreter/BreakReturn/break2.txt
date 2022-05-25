@@ -1,5 +1,0 @@
-(setq x 1)
-x
-(break)
-(setq x 2)
-x

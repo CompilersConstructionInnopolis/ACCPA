@@ -1,6 +1,4 @@
-(quote (setq dsfdhsa (func tyui (lambda (prog (cond true (while true fds) false) null) uiouio1223) 456.3 )) )
-(return 42)
-(break)
+(quote (setq dsfdhsa (func tyui (lambda (prog (cond true () false) ()) uiouio1223) 456.3 )) )
 
 (cons f (12 432))
 
@@ -16,7 +14,6 @@
 (isint 1 )
 ( isreal 2 )
 ( isbool true )
-( isnull abcc )
 ( isatom x )
 ( islist (a a a) )
 

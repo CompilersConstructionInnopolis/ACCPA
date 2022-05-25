@@ -1,5 +1,0 @@
-(setq a true)
-(setq b 2)
-(setq c null)
-(cons a (b c false -7.0))
-(cons a (tail (false 5 b c)))

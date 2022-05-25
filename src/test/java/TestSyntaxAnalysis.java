@@ -39,7 +39,7 @@ public class TestSyntaxAnalysis {
     @Test
     void testAllGrammar() throws IOException {
         String programName = programsDirectory + "allGrammar.txt";
-        String expected = "'(Quote={SetQ{atom=dsfdhsa, element=FuncNode{atom=tyui, list=LambdaNode{list=ProgNode{list=CondNode{condition=true, trueAction=WhileNode{condition=true, action=fds}, falseAction=false}, element=null}, element=uiouio1223}, element=456.3}}} ReturnNode{element=42} BreakNode '(cons f '(12 432)) '(tail '(A B C)) '(equal 43 '(plus 2 3)) '(nonequal 32 '(times 123 2.5)) '(less '(minus 4 5) 432) '(lesseq 42 '(divide 22 3.3)) '(greater '(head '(a b c)) 1) '(isint 1) '(isreal 2) '(isbool true) '(isnull abcc) '(isatom x) '(islist '(a a a)) '(and true false) '(or true '(false true)) '(xor false true) '(not true) '(eval '(greatereq 22 1)))";
+        String expected = "'(Quote={SetQ{atom=dsfdhsa, element=FuncNode{atom=tyui, list=LambdaNode{list=ProgNode{list=CondNode{condition=true, trueAction='(), falseAction=false}, element='()}, element=uiouio1223}, element=456.3, token=FuncToken row=0, columns=22:26, content=\"func\"}, token=SetQToken row=0, columns=8:12, content=\"setq\"}} '(cons f '(12 432)) '(tail '(A B C)) '(equal 43 '(plus 2 3)) '(nonequal 32 '(times 123 2.5)) '(less '(minus 4 5) 432) '(lesseq 42 '(divide 22 3.3)) '(greater '(head '(a b c)) 1) '(isint 1) '(isreal 2) '(isbool true) '(isatom x) '(islist '(a a a)) '(and true false) '(or true '(false true)) '(xor false true) '(not true) '(eval '(greatereq 22 1)))";
         runCompilerEquals(programName, expected);
     }
 }
