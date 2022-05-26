@@ -19,6 +19,7 @@ public class AutoType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof AutoType;
+        return true;
+//        return other == null || other instanceof AnyType ||  other instanceof AutoType;
     }
 }

@@ -3,6 +3,7 @@ package syntax_analysis.node;
 import interpreter.DefinedFunction;
 import interpreter.PredefinedFunction;
 import lexical_analysis.tokens.Token;
+import syntax_analysis.node.type_node.AnyType;
 import syntax_analysis.node.type_node.ListType;
 import syntax_analysis.node.type_node.NodeType;
 import syntax_analysis.node.type_node.UnitType;
@@ -62,12 +63,12 @@ public class ListNode implements ElementInterface {
         PredefinedFunction predefinedFunction = new PredefinedFunction(elements);
         if (predefinedFunction.isPredefinedFunction()) {
             // todo return function type
-            throw new RuntimeException("Not implemented in ListNode :(");
+            return new AnyType();
         }
         DefinedFunction definedFunction = new DefinedFunction(elements);
         if (definedFunction.isDefinedFunction()) {
             // todo return function type
-            throw new RuntimeException("Not implemented in ListNode :(");
+            return new AnyType();
         }
         if (elements.isEmpty()) {
             return new ListType(new UnitType());

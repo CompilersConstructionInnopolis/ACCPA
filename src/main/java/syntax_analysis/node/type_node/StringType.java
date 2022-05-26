@@ -20,6 +20,6 @@ public class StringType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof StringType;
+        return other == null || other instanceof AutoType || other instanceof AnyType ||  other instanceof StringType;
     }
 }

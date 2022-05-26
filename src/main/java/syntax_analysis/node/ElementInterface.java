@@ -8,8 +8,8 @@ public interface ElementInterface {
     ElementInterface evaluate();
 
 //    List<NodeType> getArgumentType();
-//
-//    void setArgumentType(List<NodeType>);
+
+    //    void setArgumentType(List<NodeType>);
 //
     NodeType getReturnType();
 //

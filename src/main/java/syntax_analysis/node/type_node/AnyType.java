@@ -20,6 +20,7 @@ public class AnyType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof AnyType;
+        return true;
+//        return other == null || other instanceof AutoType || other instanceof AnyType;
     }
 }

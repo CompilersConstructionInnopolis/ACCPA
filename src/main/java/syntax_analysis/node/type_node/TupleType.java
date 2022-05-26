@@ -34,6 +34,9 @@ public class TupleType implements NodeType {
 
     @Override
     public boolean isEqualType(NodeType other) {
+        if (other == null) {
+            return true;
+        }
         if (other instanceof TupleType) {
             TupleType otherTuple = (TupleType) other;
             if (otherTuple.elements.size() == elements.size()) {

@@ -2,6 +2,7 @@ package syntax_analysis.node.predefined_function;
 
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.AnyType;
 import syntax_analysis.node.type_node.NodeType;
 
 public class LogicalOperatorFunction implements ElementInterface {
@@ -52,7 +53,7 @@ public class LogicalOperatorFunction implements ElementInterface {
     public NodeType getReturnType() {
         // todo
 
-        return null;
+        return new AnyType();
     }
 
     private LiteralNode performBinaryOperation(boolean fElValue, boolean sElValue) {

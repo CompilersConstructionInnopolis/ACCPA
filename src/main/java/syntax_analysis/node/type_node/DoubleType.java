@@ -19,6 +19,6 @@ public class DoubleType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof DoubleType;
+        return other == null || other instanceof AutoType || other instanceof AnyType ||  other instanceof DoubleType;
     }
 }

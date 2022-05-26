@@ -34,3 +34,5 @@
 (cons (getMinElement lst) (sort (removeElement (getMinElement lst) lst)) )
 )
 )
+
+'(plus minus )

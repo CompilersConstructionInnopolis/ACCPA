@@ -1,7 +1,11 @@
 package syntax_analysis.node;
 
 import interpreter.AtomsTable;
+import interpreter.FunctionsTable;
 import lexical_analysis.tokens.Token;
+import syntax_analysis.node.type_node.AnyType;
+import syntax_analysis.node.type_node.FunctionType;
+import syntax_analysis.node.type_node.ListOfTypes;
 import syntax_analysis.node.type_node.NodeType;
 
 import java.util.List;
@@ -9,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class FunctionAtom implements ElementInterface {
 
-    private final List<AtomNode> arguments;
-    private final ElementInterface body;
+    public final List<AtomNode> arguments;
+    public final ElementInterface body;
     List<ElementInterface> parameters;
 
     Token token;
@@ -66,7 +70,7 @@ public class FunctionAtom implements ElementInterface {
     @Override
     public NodeType getReturnType() {
         // todo
-        return null;
+        return new AnyType();
     }
 
     public int getArgumentsNumber() {

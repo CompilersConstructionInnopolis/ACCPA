@@ -5,9 +5,7 @@
 %define api.parser.public
 
 %code imports {
-	import lexical_analysis.tokens.Token;
 	import lexical_analysis.tokens.EvalToken;
-	import lexical_analysis.tokens.arithmetic_function.DivideToken;
         import lexical_analysis.tokens.IdentifierToken;
         import lexical_analysis.tokens.arithmetic_function.DivideToken;
         import lexical_analysis.tokens.arithmetic_function.MinusToken;
@@ -129,56 +127,56 @@ Elements
 	;
 TupleElements
 	: /* empty */  {$$ = new ListNode();}
-	| CommaToken Element TupleElements {$$ = new ListNode($2, $3 );}
+	| CommaToken Element TupleElements {$$ = new ListNode($2, $3);}
 	;
 Element
 	: Atom {$$ = $1;}
 	| Literal {$$ = $1;}
 	| List {$$ = $1;}
-	| QuoteShortToken Element {$$ = new QuoteNode($2, (Token) yyval  );}
-	| OpenParenthesisToken Element CommaToken Element TupleElements CloseParenthesisToken {$$ = new TupleNode($2, $4, $5, (Token) yyval  );}
+	| QuoteShortToken Element {$$ = new QuoteNode($2);}
+	| OpenParenthesisToken Element CommaToken Element TupleElements CloseParenthesisToken {$$ = new TupleNode($2, $4, $5);}
 	;
 List
-	: OpenParenthesisToken Element Elements CloseParenthesisToken {$$ = new ListNode($2, $3 );}
+	: OpenParenthesisToken Element Elements CloseParenthesisToken {$$ = new ListNode($2, $3);}
 	| OpenParenthesisToken SpecialForm CloseParenthesisToken {$$ = $2;}
 	| OpenParenthesisToken CloseParenthesisToken {$$ = new ListNode();}
 	;
 SpecialForm
-	: QuoteToken Element {$$ = new QuoteNode($2, (Token) yyval );}
+	: QuoteToken Element {$$ = new QuoteNode($2);}
 	| DefineToken Atom Type {$$ = new DefineNode($2, $3);}
-	| SetQToken Atom Element {$$ = new SetQNode($2, $3, (Token) yyval);}
+	| SetQToken Atom Element {$$ = new SetQNode($2, $3);}
 	| FunctypeToken Atom FunctionType {$$ = new FunctypeNode($2, $3);}
-	| FuncToken Atom List Element {$$ = new FuncNode($2, $3, $4, (Token) yyval );}
-	| LambdaToken List Element {$$ = new LambdaNode($2, $3, (Token) yyval );}
-	| ProgToken List Element {$$ = new ProgNode($2, $3, (Token) yyval );}
-	| CondToken Element Element Element {$$ = new CondNode($2, $3, $4, (Token) yyval );}
+	| FuncToken Atom List Element {$$ = new FuncNode($2, $3, $4);}
+	| LambdaToken List Element {$$ = new LambdaNode($2, $3);}
+	| ProgToken List Element {$$ = new ProgNode($2, $3);}
+	| CondToken Element Element Element {$$ = new CondNode($2, $3, $4);}
 	;
 Type
 	: BaseType {$$ = $1;}
 	| FunctionType {$$ = $1;}
 	;
 Types
-	: /* empty */ {$$ = new ListOfTypes((Token) yyval );}
-	| Type Types {$$ = new ListOfTypes($1, $2, (Token) yyval  );}
+	: /* empty */ {$$ = new ListOfTypes();}
+	| Type Types {$$ = new ListOfTypes($1, $2);}
 	;
 TupleTypes
-	: /* empty */ {$$ = new ListOfTypes((Token) yyval );}
-	| CommaToken Type TupleTypes {$$ = new ListOfTypes($2, $3, (Token) yyval  );}
+	: /* empty */ {$$ = new ListOfTypes();}
+	| CommaToken Type TupleTypes {$$ = new ListOfTypes($2, $3);}
 	;
 BaseType
-	: IntToken {$$ = new IntType((Token) yyval );}
-	| DoubleToken {$$ = new DoubleType((Token) yyval );}
-	| BooleanToken {$$ = new BooleanType((Token) yyval );}
-	| StringToken {$$ = new StringType((Token) yyval );}
-	| NumToken {$$ = new NumType((Token) yyval );}
-	| AnyToken {$$ = new AnyType((Token) yyval );}
-	| UnitToken {$$ = new UnitType((Token) yyval );}
-	| AutoToken {$$ = new AutoType((Token) yyval );}
-	| OpenParenthesisToken Type CloseParenthesisToken {$$ = new ListType($2, (Token) yyval  );}
-	| OpenParenthesisToken Type CommaToken Type TupleTypes CloseParenthesisToken {$$ = new TupleType($2, $4, $5, (Token) yyval );}
+	: IntToken {$$ = new IntType();}
+	| DoubleToken {$$ = new DoubleType();}
+	| BooleanToken {$$ = new BooleanType();}
+	| StringToken {$$ = new StringType();}
+	| NumToken {$$ = new NumType();}
+	| AnyToken {$$ = new AnyType();}
+	| UnitToken {$$ = new UnitType();}
+	| AutoToken {$$ = new AutoType();}
+	| OpenParenthesisToken Type CloseParenthesisToken {$$ = new ListType($2);}
+	| OpenParenthesisToken Type CommaToken Type TupleTypes CloseParenthesisToken {$$ = new TupleType($2, $4, $5);}
 	;
 FunctionType
-	: OpenParenthesisToken Type Types ArrowToken Type CloseParenthesisToken {$$ = new FunctionType($2, $3, $5, (Token) yyval );}
+	: OpenParenthesisToken Type Types ArrowToken Type CloseParenthesisToken {$$ = new FunctionType($2, $3, $5);}
 	;
 Atom
 	: IdentifierToken {$$ = new AtomNode($1);}

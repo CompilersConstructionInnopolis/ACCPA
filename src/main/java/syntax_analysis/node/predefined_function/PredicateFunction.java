@@ -4,6 +4,7 @@ import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
 import syntax_analysis.node.ListNode;
 import syntax_analysis.node.LiteralNode;
+import syntax_analysis.node.type_node.AnyType;
 import syntax_analysis.node.type_node.NodeType;
 
 public class PredicateFunction implements ElementInterface {
@@ -24,7 +25,7 @@ public class PredicateFunction implements ElementInterface {
     @Override
     public NodeType getReturnType() {
         // todo
-        return null;
+        return new AnyType();
     }
 
     private LiteralNode performOperation(ElementInterface evaluatedElement) {
