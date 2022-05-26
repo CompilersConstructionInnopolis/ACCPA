@@ -19,6 +19,6 @@ public class IntType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof IntType;
+        return other == null || other instanceof AutoType || other instanceof AnyType ||  other instanceof IntType;
     }
 }

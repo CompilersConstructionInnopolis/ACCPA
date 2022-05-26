@@ -1,10 +1,129 @@
-quote ' setq func lambda prog cond
-plus minus times divide
-head tail cons
-equal nonequal less lesseq greater greatereq
-isint isreal isbool isatom islist
-and or xor not
-eval
-123 -543 2.3 -42.2 true false
-( )
-; this is a comment
+(define x Int)
+(setq x 3)
+x
+(setq x 6)
+x
+;(setq x 6.3)
+;x
+
+(setq y 4)
+y
+;(setq y true)
+;y
+
+;(define z Num)
+;(define z Any)
+;(define z Unit)
+
+(define z Auto)
+(setq z 3)
+z
+;(setq z 3.6)
+
+(define a Int)
+(setq a y)
+a
+(setq y 77)
+a
+y
+
+(define u (Int))
+(setq u (1 2 3))
+;(setq u ())
+u
+(setq u (2 4 5))
+;(setq u (1 2.2 3))
+;(setq u (true false))
+u
+
+;(define i (Unit))
+;(setq i ())
+;i
+;(setq i (1 2 3))
+;i
+;(setq i (true false))
+;i
+
+
+;(define b (Int -> Int))
+
+;(define x Double)
+;(define x Boolean)
+;(define x String)
+;(define x Any)
+;(define x Unit)
+;(define x Num)
+;(define x Auto)
+;(define x (Int))
+;(define x (((Int))))
+;(define x (Int, String))
+;(define x ((Int), String))
+;(define x ((Int, String)))
+;(define x ((Int), (String, Boolean, (Double))))
+
+;(functype x (Int String-> Int))
+;(functype x (Int String-> Unit))
+;(functype x (Unit -> Boolean))
+;(functype x ((Int) -> (String, Boolean)))
+;(functype x ((Int) -> (String, (Boolean -> Double))))
+
+
+;(functype superFunction (Unit -> Int))
+;(func superFunction (d) 4)
+;(superFunction 1)
+
+;(functype nafd (Unit Int -> Double))
+
+
+(func lastElement (l)
+  (cond (isempty (tail l))
+        (head l)
+        (lastElement (tail l))))
+
+
+(func reverse (l)
+    (cond (isempty (tail l))
+    (cons (lastElement l) ())
+    (cons (lastElement l) (reverse (getListWithoutLastElement l)))))
+
+(func getListWithoutLastElement (l)
+    (cond (isempty (tail l))
+        ()
+        (cons (head l) (getListWithoutLastElement (tail l)))))
+
+
+
+(func getMinElement (lst)
+(cond (isempty (tail lst))
+ (head lst)
+ (cond (less (head lst) (getMinElement (tail lst)))
+ (head lst)
+ (getMinElement (tail lst))))
+)
+
+(func removeElement (el lst)
+(cond (equal (head lst) el) (tail lst) (cons (head lst) (removeElement el (tail lst))))
+)
+
+(func sort (lst)
+(cond (isempty (tail lst))
+ lst
+(cons (getMinElement lst) (sort (removeElement (getMinElement lst) lst)) )
+)
+)
+
+(setq sortedList (sort ( 8 9 3 7 6 6 9)))
+
+(func getMax (x y) 3)
+
+
+(define superMaxElement Auto)
+(setq superMaxElement (getMax (head sortedList) (tail sortedList)))
+
+(functype getMaxElementTwice (Unit -> Auto))
+(func getMaxElementTwice () (times 2 (getMax (head sortedList) (tail sortedList))))
+(getMaxElementTwice)
+
+(functype sum (Int -> Int))
+(func sum (x) (plus x x))
+(sum 5)

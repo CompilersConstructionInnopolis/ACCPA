@@ -42,6 +42,9 @@ public class ListOfTypes implements NodeType {
 
     @Override
     public boolean isEqualType(NodeType other) {
+        if (other == null) {
+            return true;
+        }
         if (other instanceof ListOfTypes) {
             ListOfTypes otherList = (ListOfTypes) other;
             if (otherList.elements.size() == elements.size()) {

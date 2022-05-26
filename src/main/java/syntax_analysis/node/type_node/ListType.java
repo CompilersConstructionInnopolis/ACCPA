@@ -23,14 +23,17 @@ public class ListType implements NodeType {
 
     @Override
     public boolean isEqualType(NodeType other) {
+        if (other == null){
+            return true;
+        }
         if (other instanceof ListType) {
             ListType otherList = (ListType) other;
-//            if (elementType instanceof UnitType) {
-//                return true;
-//            }
-//            if (otherList.elementType instanceof UnitType) {
-//                return true;
-//            }
+            if (elementType instanceof UnitType) {
+                return true;
+            }
+            if (otherList.elementType instanceof UnitType) {
+                return true;
+            }
             return elementType.isEqualType(otherList.elementType);
         }
         return false;

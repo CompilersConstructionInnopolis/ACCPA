@@ -20,6 +20,6 @@ public class UnitType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof UnitType;
+        return other == null || other instanceof AutoType || other instanceof UnitType;
     }
 }

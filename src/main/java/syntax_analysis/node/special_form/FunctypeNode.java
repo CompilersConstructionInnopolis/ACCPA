@@ -1,7 +1,10 @@
 package syntax_analysis.node.special_form;
 
+import interpreter.AtomsTable;
+import interpreter.FunctionsTable;
 import syntax_analysis.node.AtomNode;
 import syntax_analysis.node.ElementInterface;
+import syntax_analysis.node.type_node.AnyType;
 import syntax_analysis.node.type_node.FunctionType;
 import syntax_analysis.node.type_node.NodeType;
 
@@ -16,21 +19,20 @@ public class FunctypeNode implements ElementInterface {
 
     @Override
     public ElementInterface evaluate() {
-//        if (PredefinedFunction.isKeyword(atom.name)) {
-//            throw new RuntimeException("Can't reassign keyword: " + atom.name);
-//        }
-//        if (DefinedFunction.isDefinedFunction(atom.name)) {
-//            throw new RuntimeException("There is a defined function: " + atom.name);
-//        }
-//        atom.value = element.evaluate();
-//        AtomsTable.getInstance().addAtom(atom);
+        if (FunctionsTable.getInstance().contains(atom.name)) {
+            throw new RuntimeException("The function is already defined: " + atom.name);
+        }
+        if (AtomsTable.getInstance().contains(atom.name)) {
+            throw new RuntimeException("Can't name a function with already defined identifier name: " + atom.name);
+        }
+        FunctionsTable.getInstance().defineFunction(atom.name, atomType);
         return null;
     }
 
     @Override
     public NodeType getReturnType() {
         // todo
-        return null;
+        return new AnyType();
     }
 
     @Override

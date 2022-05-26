@@ -20,6 +20,6 @@ public class NumType implements NodeType {
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof NumType || other instanceof IntType || other instanceof DoubleType;
+        return other == null || other instanceof AutoType || other instanceof AnyType ||  other instanceof NumType || other instanceof IntType || other instanceof DoubleType;
     }
 }

@@ -22,6 +22,6 @@ public class BooleanType implements NodeType{
 
     @Override
     public boolean isEqualType(NodeType other) {
-        return other instanceof BooleanType;
+        return other == null || other instanceof AutoType || other instanceof AnyType || other instanceof BooleanType;
     }
 }

@@ -3,6 +3,7 @@ package syntax_analysis.node;
 import interpreter.DefinedFunction;
 import interpreter.PredefinedFunction;
 import lexical_analysis.tokens.Token;
+import syntax_analysis.node.type_node.AnyType;
 import syntax_analysis.node.type_node.NodeType;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class TupleNode implements ElementInterface {
     @Override
     public NodeType getReturnType() {
         // todo
-        return null;
+        return new AnyType();
     }
 }
 
